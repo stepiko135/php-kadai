@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1-2</title>
 </head>
+
 <body>
-<form action="" method="POST">
-<input type="text" name="name" autofocus>
-<input type="submit" value="送信">
-</form>
-</body>
-</html>
-<?php
-    $fruits = ['apple', 'orange', 'strawberry'];
-    if(isset($_POST['name'])) {
-        $keyword = $_POST['name'];
-        if (in_array($keyword, $fruits)) {
-            echo $keyword . 'は、配列に含まれています。';
-        } else {
-            echo $keyword . 'は、配列に含まれていません。';
-        }
+    <?php
+    $question = [
+        "問題" => "日本の首都は？",
+    ];
+    $answers = [
+        "回答1" => "大阪",
+        "回答2" => "北海道",
+        "回答3" => "箱根",
+        "回答4" => "東京",
+    ];
+
+    echo "<h1>問題 {$question["問題"]} </h1>";
+    foreach ($answers as $key => $answer) {
+        echo "{$key} {$answer}<br>";
     }
-?>
+    ?>
+</body>
+
+</html>
