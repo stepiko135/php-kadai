@@ -9,9 +9,11 @@
 
 <body>
     <?php
-    $question = [
+    $questions = [
         "問題" => "日本の首都は？",
     ];
+    $questionsKeys = array_keys($questions);
+
     $answers = [
         "回答1" => "大阪",
         "回答2" => "北海道",
@@ -19,7 +21,7 @@
         "回答4" => "東京",
     ];
 
-    echo "<h1>問題 {$question["問題"]} </h1>";
+    echo "<h1>{$questionsKeys[0]} {$questions["問題"]} </h1>";
     foreach ($answers as $key => $answer) {
         echo "{$key} {$answer}<br>";
     }
