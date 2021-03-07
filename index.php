@@ -1,52 +1,42 @@
+<?php
+$mySql = new PDO('mysql:host=localhost:3306;dbname=kadai', 'root', 'root');
+
+$stmt = $mySql->prepare("SELECT * FROM posts");
+$stmt->execute();
+
+$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1-4</title>
+    <title>3</title>
 </head>
 
 <body>
-    <form action="" method="post">
-        <select name="janken">
-            <option value="グー">グー</option>
-            <option value="チョキ">チョキ</option>
-            <option value="パー">パー</option>
-        </select>
+    <h1>掲示板</h1>
+    <h2>新規投稿</h2>
+    <form action="posted.php" method="POST">
+        <label>name:
+            <input type="text" name="name" autofocus>
+        </label>
         <br>
-        <input type="submit" value="じゃんけん！">
+        <label for="content">投稿内容:</label><br>
+        <textarea id="content" name="content" cols="30" rows="10"></textarea><br>
+        <input type="submit" value="投稿">
     </form>
-    <?php
-    function janken($user)
-    {
-        $choice = ["グー", "チョキ", "パー"];
-        $com = $choice[rand(0, 2)];
-        $user = $user;
-
-        echo '自分:' . $user .'<br>';
-        echo '相手:' . $com .'<br>';
-        if ($user === $com) {
-            echo "あいこ";
-        } elseif ($user === "グー" && $com === "チョキ") {
-            echo "あなたの勝ち！";
-        } elseif ($user === "グー" && $com === "パー") {
-            echo "あなたの敗北です。。。";
-        } elseif ($user === "チョキ" && $com === "グー") {
-            echo "あなたの敗北です。。。";
-        } elseif ($user === "チョキ" && $com === "パー") {
-            echo "あなたの勝ち！";
-        } elseif ($user === "パー" && $com === "グー") {
-            echo "あなたの勝ち！";
-        } elseif ($user === "パー" && $com === "チョキ") {
-            echo "あなたの敗北です。。。";
-        }
-    };
-
-    if (isset($_POST['janken'])) {
-        janken($_POST['janken']);
-    }
-    ?>
+    <br>
+    <h2>投稿内容一覧</h2>
+    <?php foreach($posts as $post): ?>
+    <div style="border: double 5px cyan">
+    <?= "No: " . $post['id'] . "<br>"?>
+    <?= "名前: ". $post['name'] . "<br>"?>
+    <?= "投稿内容: " . $post['content'] . "<br>"?>
+    </div>
+    <br>
+    <?php endforeach;?>
 </body>
 
 </html>
