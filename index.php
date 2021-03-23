@@ -35,6 +35,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?= "No: " . $count . "<br>" ?>
             <?= "名前: " . $post['name'] . "<br>" ?>
             <?= "投稿内容: " . $post['content'] . "<br>" ?>
+            <button type="button" onClick="location.href='/edit.php?id=<?= $post['id'] ?>'">編集</button>
             <form action="deleted.php" method="POST">
                 <input type="hidden" name="method" value="DELETE">
                 <?= '<input type="hidden" name="id" value=' . $post['id'] . '>' ?>
